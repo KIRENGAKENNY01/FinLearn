@@ -1,0 +1,19 @@
+{
+  "": {
+    "swift-dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/master.swiftdeps"
+  },
+  "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-service-lifecycle/Sources/UnixSignals/UnixSignal.swift": {
+    "dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignal.d",
+    "object": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignal.swift.o",
+    "swiftmodule": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignal~partial.swiftmodule",
+    "swift-dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignal.swiftdeps",
+    "diagnostics": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignal.dia"
+  },
+  "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-service-lifecycle/Sources/UnixSignals/UnixSignalsSequence.swift": {
+    "dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignalsSequence.d",
+    "object": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignalsSequence.swift.o",
+    "swiftmodule": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignalsSequence~partial.swiftmodule",
+    "swift-dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignalsSequence.swiftdeps",
+    "diagnostics": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/UnixSignals.build/UnixSignalsSequence.dia"
+  }
+}

@@ -3,30 +3,27 @@ import SwiftUI
 struct LessonPage: View {
     let lesson: LessonItem
     let accent: Color
+    let stageId: String
     
-    // Placeholder topics per lesson (replace with backend data)
-    private var topics: [LearningObjective] {
-        [
-            LearningObjective(title: "Why financial literacy matters in everyday life", description: "Learn the core definition and why it matters for everyday decisions."),
-            LearningObjective(title: "Income, Expenses, Savings, and Investments", description: "Connect financial skills to real-world outcomes like saving and spending."),
-            LearningObjective(title: "Common financial myths and realities", description: "Spot common pitfalls and how to avoid them.")
-        ]
-    }
+    @State private var topics: [LearningObjective] = []
+    @State private var loading: Bool = true
+    @State private var chapterProgress: Double = 0.0
     
     var body: some View {
         ScrollView(showsIndicators: false) {
             VStack(spacing: 24) {
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    
                     Text(lesson.title)
-                        .font(.system(size: 26, weight: .bold))
-                        .foregroundColor(Color(hex: "#01312D"))
+                        .font(.system(size: 28, weight: .bold))
+                        .foregroundColor(Color(hex: "#1B2534"))
                         .fixedSize(horizontal: false, vertical: true)
                     
+                    PercentageCard(title: "Chapter Progress", subhead: "Current Chapter", progressNumber: Float(chapterProgress))
+                    
                     Text(lesson.paragraph)
-                        .font(.system(size: 15))
-                        .foregroundColor(.gray)
+                        .font(.system(size: 17))
+                        .foregroundColor(Color(hex: "#1B2534").opacity(0.7))
                         .fixedSize(horizontal: false, vertical: true)
                 }
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -35,30 +32,41 @@ struct LessonPage: View {
                 VStack(alignment: .leading, spacing: 16) {
                     HStack {
                         Text("Topics")
-                            .font(.system(size: 20, weight: .bold))
-                            .foregroundColor(Color(hex: "#01312D"))
+                            .font(.system(size: 24, weight: .bold))
+                            .foregroundColor(Color(hex: "#1B2534"))
                         Spacer()
-                        Text("\(lesson.objectivesCount) Topics")
-                            .font(.system(size: 14, weight: .medium))
-                            .foregroundColor(.gray)
+                        Text("\(topics.count) Topics")
+                            .font(.system(size: 15, weight: .medium))
+                            .foregroundColor(Color(hex: "#1B2534").opacity(0.7))
                     }
                     
-                    LazyVStack(spacing: 14) {
-                        ForEach(topics) { topic in
-                            NavigationLink {
-                                ObjectivePage(
-                                    lesson: lesson,
-                                    accent: accent
-                                )
-                            } label: {
-                                ReusableCard(
-                                    icon: "book",
-                                    title: topic.title,
-                                    finished: "\(lesson.objectivesCount) objectives",
-                                    status: lesson.status
-                                )
+                    if loading {
+                        ProgressView()
+                            .padding()
+                    } else if topics.isEmpty {
+                        Text("No topics available.")
+                            .foregroundColor(.secondary)
+                    } else {
+                        LazyVStack(spacing: 14) {
+                            ForEach(topics) { topic in
+                                NavigationLink {
+                                    ObjectivePage(
+                                        lesson: lesson,
+                                        topic: topic,
+                                        accent: accent,
+                                        stageId: stageId
+                                    )
+                                } label: {
+                                    ReusableCard(
+                                        icon: "book",
+                                        title: topic.title,
+                                        finished: "Click to see objectives",
+                                        status: topic.status?.rawValue ?? "Not started"
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                                .disabled(topic.status == .locked)
                             }
-                            .buttonStyle(.plain)
                         }
                     }
                 }
@@ -70,20 +78,35 @@ struct LessonPage: View {
         .background(Color(hex: "#EAFDEF"))
         .navigationTitle("Lesson")
         .navigationBarTitleDisplayMode(.inline)
+        .task {
+            await loadTopics()
+        }
     }
-}
-
-#Preview {
-    NavigationStack {
-        LessonPage(
-            lesson: LessonItem(
-                title: "Why financial literacy matters in everyday life",
-                paragraph: "Learn what financial literacy means and why it’s essential for your future. Understand the basics of earning, spending, saving, and investing money wisely.",
-                objectivesCount: 4,
-                status: "Completed",
-                duration: "15 min"
-            ),
-            accent: Color(hex: "#72BF00")
-        )
+    
+    private func loadTopics() async {
+        loading = true
+        do {
+            let topicDTOs = try await LearningService.shared.fetchTopics(stageId: stageId, chapterId: lesson.backendId)
+            // Calculate chapter progress locally from topic statuses
+            // (Alternative: backend could return it, but calculating from topics is fine here)
+            let completedCount = topicDTOs.filter { $0.status == "completed" }.count
+            self.chapterProgress = Double(completedCount) / Double(max(1, topicDTOs.count))
+            
+            topics = topicDTOs.map { dto in
+                LearningObjective(
+                    backendId: dto.id ?? "",
+                    title: dto.title,
+                    description: "", // Topic doesn't have description in backend yet
+                    status: CompletionStatus(rawValue: dto.status ?? "locked")
+                )
+            }
+            loading = false
+        } catch {
+            if let urlError = error as? URLError, urlError.code == .cancelled {
+                return
+            }
+            print("Failed to load topics: \(error)")
+            loading = false
+        }
     }
 }

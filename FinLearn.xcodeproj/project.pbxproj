@@ -6,6 +6,11 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		D6432E6C2F157A520050A880 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D6432E6B2F157A520050A880 /* FirebaseAuth */; };
+		D6432E6E2F157A5A0050A880 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D6432E6D2F157A5A0050A880 /* FirebaseCore */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		D6E1BAA02EC669B000628D37 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -65,6 +70,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D6432E6E2F157A5A0050A880 /* FirebaseCore in Frameworks */,
+				D6432E6C2F157A520050A880 /* FirebaseAuth in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -85,12 +92,20 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D6432E6A2F157A280050A880 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		D6E1BA892EC669AE00628D37 = {
 			isa = PBXGroup;
 			children = (
 				D6E1BA942EC669AF00628D37 /* FinLearn */,
 				D6E1BAA22EC669B000628D37 /* FinLearnTests */,
 				D6E1BAAC2EC669B000628D37 /* FinLearnUITests */,
+				D6432E6A2F157A280050A880 /* Frameworks */,
 				D6E1BA932EC669AF00628D37 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -125,6 +140,8 @@
 			);
 			name = FinLearn;
 			packageProductDependencies = (
+				D6432E6B2F157A520050A880 /* FirebaseAuth */,
+				D6432E6D2F157A5A0050A880 /* FirebaseCore */,
 			);
 			productName = FinLearn;
 			productReference = D6E1BA922EC669AF00628D37 /* FinLearn.app */;
@@ -208,6 +225,9 @@
 			);
 			mainGroup = D6E1BA892EC669AE00628D37;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D6E69E6D2F10C8D70008097B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = D6E1BA932EC669AF00628D37 /* Products */;
 			projectDirPath = "";
@@ -408,6 +428,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2T3993JFV2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FinLearn/Info.plist;
@@ -415,12 +436,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Kenny-K.FinLearn.FinLearn";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Kenny-K.Finlearn.Finlearn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -435,6 +457,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 2T3993JFV2;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = FinLearn/Info.plist;
@@ -442,12 +465,13 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.Kenny-K.FinLearn.FinLearn";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.Kenny-K.Finlearn.Finlearn";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -563,6 +587,30 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D6E69E6D2F10C8D70008097B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 12.7.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D6432E6B2F157A520050A880 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6E69E6D2F10C8D70008097B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D6432E6D2F157A5A0050A880 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D6E69E6D2F10C8D70008097B /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D6E1BA8A2EC669AE00628D37 /* Project object */;
 }

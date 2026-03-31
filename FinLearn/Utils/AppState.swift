@@ -10,6 +10,7 @@ class AppState: ObservableObject {
     
     /// Authentication state
     @Published var isAuthenticated: Bool = false
+    @Published var errorMessage: String?
     
     /// User Profile (Single Source of Truth)
     @Published var currentUser: UserProfile?
@@ -30,8 +31,16 @@ class AppState: ObservableObject {
         case mainTabs
     }
     
-    init(authService: AuthServiceProtocol = MockAuthService(),
-         databaseService: DatabaseServiceProtocol = MockDatabaseService()) {
+    /// Auth Screen Tabs
+    enum AuthTab {
+        case login
+        case signup
+    }
+    
+    @Published var currentAuthTab: AuthTab = .login
+    
+    init(authService: AuthServiceProtocol = FirebaseAuthService(),
+         databaseService: DatabaseServiceProtocol = APIDatabaseService()) {
         self.authService = authService
         self.databaseService = databaseService
         
@@ -44,6 +53,7 @@ class AppState: ObservableObject {
             self.currentUser = user
             self.isAuthenticated = true
             self.currentRoute = .mainTabs
+            Task { try? await self.databaseService.syncUser(user: user) }
         } else {
             self.isAuthenticated = false
             self.currentUser = nil
@@ -51,41 +61,68 @@ class AppState: ObservableObject {
         }
     }
     
-    /// Navigate to welcome screen
-    func showWelcome() {
-        currentRoute = .welcome
-        isAuthenticated = false
-        currentUser = nil
-        authService.signOut()
+    /// Handle login
+    func login(email: String, password: String) {
+        errorMessage = nil
+        Task {
+            do {
+                try await authService.signIn(email: email, password: password)
+                
+                // Manually update state on success
+                if let user = authService.currentUser {
+                    await MainActor.run {
+                        self.currentUser = user
+                        self.isAuthenticated = true
+                        self.currentRoute = .mainTabs
+                        // Trigger sync
+                        Task { try? await self.databaseService.syncUser(user: user) }
+                    }
+                }
+            } catch {
+                print("Auth Error: \(error)")
+                await MainActor.run {
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
+    }
+    
+    /// Handle signup
+    func signup(name: String, email: String, password: String) {
+        errorMessage = nil
+        Task {
+            do {
+                try await authService.signUp(name: name, email: email, password: password)
+                
+                // Prevent auto-login, force user to login manually
+                authService.signOut()
+                
+                await MainActor.run {
+                    self.currentAuthTab = .login
+                    self.errorMessage = "Account created! Please log in." // Using error message for feedback for now
+                }
+            } catch {
+                print("Signup Error: \(error)")
+                await MainActor.run {
+                    self.errorMessage = error.localizedDescription
+                }
+            }
+        }
     }
     
     /// Navigate to auth screen
     func showAuth() {
         currentRoute = .auth
+        currentAuthTab = .login
     }
-    
-    /// Handle successful login/signup
-    func authenticate() {
-        Task {
-            do {
-                try await authService.signIn()
-                if let user = authService.currentUser {
-                    self.currentUser = user
-                    self.isAuthenticated = true
-                    self.currentRoute = .mainTabs
-                }
-            } catch {
-                print("Auth Error: \(error)")
-            }
-        }
-    }
-    
+
     /// Handle logout
     func logout() {
         authService.signOut()
         isAuthenticated = false
         currentUser = nil
         currentRoute = .welcome
+        currentAuthTab = .login
     }
 }
 

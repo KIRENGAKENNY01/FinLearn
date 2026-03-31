@@ -1,10 +1,13 @@
-
 import SwiftUI
 
 struct LoanView: View {
+    @EnvironmentObject var appState: AppState
     @State private var amount: Double = 500000
     @State private var interestRate: Double = 5.0
     @State private var months: Double = 12
+    @State private var loanTitle: String = ""
+    @State private var applying: Bool = false
+    @State private var showSuccess: Bool = false
     
     var monthlyPayment: Double {
         let p = amount
@@ -39,9 +42,36 @@ struct LoanView: View {
                             .bold()
                             .foregroundColor(Color(hex: "#01312D"))
                         Spacer()
+                        NavigationLink(destination: LoanApplicationsView()) {
+                            Text("My Loans")
+                                .font(.subheadline)
+                                .foregroundColor(Color(hex: "#72BF00"))
+                                .padding(.horizontal, 12)
+                                .padding(.vertical, 6)
+                                .background(Color(hex: "#DDFEC5"))
+                                .cornerRadius(10)
+                        }
                     }
                     .padding(.horizontal)
                     .padding(.top)
+                    
+                    // Input Section
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Loan Title").font(.headline).foregroundColor(Color(hex: "#01312D"))
+                        VStack(alignment: .leading, spacing: 6) {
+                            Text("Title")
+                                .font(.subheadline)
+                                .bold()
+                                .foregroundColor(Color(hex: "#01312D"))
+                            TextField("Enter loan title", text: $loanTitle)
+                                .foregroundColor(.black)
+                                .padding()
+                                .background(Color.white)
+                                .cornerRadius(8)
+                        }
+                    }
+                    .padding(.horizontal)
+
                     
                     // CARD 1: INPUTS
                     VStack(alignment: .leading, spacing: 20) {
@@ -79,7 +109,7 @@ struct LoanView: View {
                     .padding(.horizontal)
                     .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
                     
-                    // CARD 2: MONTHLY PAYMENT (Visual Highlight)
+                    // CARD 2: MONTHLY PAYMENT
                     VStack(spacing: 10) {
                         Text("Monthly Payment")
                             .font(.subheadline)
@@ -95,13 +125,7 @@ struct LoanView: View {
                     }
                     .frame(maxWidth: .infinity)
                     .padding(32)
-                    .background(
-                        ZStack {
-                            Color(hex: "#DDFEC5") // Light Lime
-                            // Optional: Add card2 image as overlay if purely decorative
-                            // Image("cards2").resizable().scaledToFit().opacity(0.1)
-                        }
-                    )
+                    .background(Color(hex: "#DDFEC5"))
                     .cornerRadius(20)
                     .padding(.horizontal)
                     .shadow(color: .black.opacity(0.05), radius: 10, x: 0, y: 5)
@@ -130,16 +154,23 @@ struct LoanView: View {
                         
                         Divider()
                         
-                        Button(action: {
-                            // Apply action
-                        }) {
-                            Text("Apply for Loan")
-                                .bold()
-                                .foregroundColor(.white)
-                                .frame(maxWidth: .infinity)
-                                .padding()
-                                .background(Color(hex: "#72BF00"))
-                                .cornerRadius(15)
+                        Button(action: applyForLoan) {
+                            if applying {
+                                ProgressView().tint(.white)
+                            } else {
+                                Text("Apply for Loan")
+                                    .bold()
+                                    .foregroundColor(.white)
+                                    .frame(maxWidth: .infinity)
+                            }
+                        }
+                        .padding()
+                        .background(loanTitle.isEmpty ? Color.gray : Color(hex: "#72BF00"))
+                        .cornerRadius(15)
+                        .disabled(loanTitle.isEmpty || applying)
+                        
+                        NavigationLink(destination: LoanApplicationsView(), isActive: $showSuccess) {
+                            EmptyView()
                         }
                     }
                     .padding(24)
@@ -154,10 +185,216 @@ struct LoanView: View {
         }
         .navigationBarTitleDisplayMode(.inline)
     }
+    
+    func applyForLoan() {
+        applying = true
+        Task {
+            do {
+                try await appState.databaseService.applyForLoan(
+                    title: loanTitle,
+                    amount: Int(amount),
+                    rate: interestRate,
+                    months: Int(months)
+                )
+                applying = false
+                showSuccess = true
+            } catch {
+                print("Failed to apply: \(error)")
+                applying = false
+            }
+        }
+    }
 }
 
-#Preview {
-    NavigationStack {
-        LoanView()
+// MARK: - Loan Applications View
+struct LoanApplicationsView: View {
+    @Environment(\.dismiss) var dismiss
+    @EnvironmentObject var appState: AppState
+    @State private var applications: [LoanApplicationDTO] = []
+    @State private var loading = false
+    
+    var body: some View {
+        ZStack {
+            Color(hex: "#EAFDEF").ignoresSafeArea()
+            
+            ScrollView {
+                VStack(spacing: 24) {
+                    
+                    // Header
+                    VStack(alignment: .leading, spacing: 8) {
+                        Text("My Applications")
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(Color(hex: "#01312D"))
+                        Text("Track your loan status")
+                            .font(.subheadline)
+                            .foregroundColor(.gray)
+                    }
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .padding(.top)
+                    .padding(.horizontal)
+                    
+                    if loading {
+                        ProgressView().padding()
+                    } else if applications.isEmpty {
+                        Text("No applications found.")
+                            .foregroundColor(.gray)
+                            .padding()
+                    } else {
+                        // Applications List
+                        VStack(spacing: 16) {
+                            ForEach(applications) { app in
+                                NavigationLink(destination: LoanSummaryView(application: app)) {
+                                    HStack {
+                                        VStack(alignment: .leading, spacing: 4) {
+                                            Text(app.title)
+                                                .font(.headline)
+                                                .foregroundColor(Color(hex: "#01312D"))
+                                            Text(app.applicationDate, style: .date)
+                                                .font(.caption)
+                                                .foregroundColor(.gray)
+                                        }
+                                        Spacer()
+                                        Text("\(Int(app.loanAmount)) RWF")
+                                            .bold()
+                                            .foregroundColor(Color(hex: "#01312D"))
+                                    }
+                                    .padding()
+                                    .background(Color.white)
+                                    .cornerRadius(16)
+                                    .shadow(color: .black.opacity(0.03), radius: 5, x: 0, y: 2)
+                                }
+                            }
+                        }
+                        .padding(.horizontal)
+                    }
+                    
+                    // Recommendations Card
+                    VStack(alignment: .leading, spacing: 12) {
+                        Text("Recommendations")
+                            .font(.headline)
+                            .foregroundColor(Color(hex: "#72BF00"))
+                        
+                        RecommendationRow(text: "Avoid multiple simultaneous loans")
+                        RecommendationRow(text: "Plan repayment before borrowing")
+                        RecommendationRow(text: "Save for small emergencies")
+                    }
+                    .padding()
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .padding(.horizontal)
+                    
+                    Spacer()
+                }
+                .padding(.bottom, 30)
+            }
+        }
+        .navigationBarBackButtonHidden(true)
+        .toolbar {
+            ToolbarItem(placement: .navigationBarLeading) {
+                Button(action: { dismiss() }) {
+                    Image(systemName: "chevron.left")
+                        .foregroundColor(Color(hex: "#01312D"))
+                }
+            }
+            ToolbarItem(placement: .principal) {
+                Text("Applications")
+                    .font(.headline)
+                    .foregroundColor(Color(hex: "#01312D"))
+            }
+        }
+        .onAppear {
+            fetchApplications()
+        }
+    }
+    
+    func fetchApplications() {
+        loading = true
+        Task {
+            do {
+                self.applications = try await appState.databaseService.getLoanApplications()
+                loading = false
+            } catch {
+                print("Failed to fetch loans: \(error)")
+                loading = false
+            }
+        }
+    }
+}
+
+struct RecommendationRow: View {
+    let text: String
+    var body: some View {
+        HStack(alignment: .top) {
+            Circle().fill(.black).frame(width: 8, height: 8).padding(.top, 6)
+            Text(text)
+                .font(.caption)
+        }
+    }
+}
+
+// MARK: - Loan Summary View
+struct LoanSummaryView: View {
+    @Environment(\.dismiss) var dismiss
+    let application: LoanApplicationDTO
+    
+    var body: some View {
+        ZStack {
+            Color(hex: "#EAFDEF").ignoresSafeArea()
+            
+            VStack(spacing: 30) {
+                VStack(spacing: 20) {
+                    Text("Loan Summary")
+                        .font(.title)
+                        .bold()
+                        .foregroundColor(Color(hex: "#01312D"))
+                    
+                    VStack(spacing: 15) {
+                        SummaryRow(label: "Loan Amount", value: "\(Int(application.loanAmount)) RWF")
+                        SummaryRow(label: "Monthly Payment", value: "\(Int(application.monthlyPayment)) RWF")
+                        SummaryRow(label: "Total Repayment", value: "\(Int(application.totalPayment)) RWF")
+                        SummaryRow(label: "Interest Rate", value: "\(String(format: "%.1f", application.annualInterestRate))%")
+                        SummaryRow(label: "Duration", value: "\(application.durationMonths) Months")
+                        SummaryRow(label: "Application Date", value: application.applicationDate.formatted(date: .abbreviated, time: .omitted))
+                    }
+                    .padding()
+                    .background(Color.white)
+                    .cornerRadius(20)
+                    .shadow(color: .black.opacity(0.05), radius: 10)
+                }
+                .padding()
+                
+                Button(action: { dismiss() }) {
+                    Text("Completed")
+                        .font(.headline)
+                        .foregroundColor(.white)
+                        .frame(maxWidth: .infinity)
+                        .padding()
+                        .background(Color(hex: "#72BF00"))
+                        .cornerRadius(30)
+                }
+                .padding(.horizontal, 30)
+                
+                Spacer()
+            }
+            .padding(.top, 40)
+        }
+        .navigationBarTitleDisplayMode(.inline)
+    }
+}
+
+struct SummaryRow: View {
+    let label: String
+    let value: String
+    var body: some View {
+        HStack {
+            Text(label)
+                .foregroundColor(.gray)
+            Spacer()
+            Text(value)
+                .bold()
+                .foregroundColor(Color(hex: "#01312D"))
+        }
     }
 }

@@ -88,6 +88,7 @@ struct QuizView: View {
                     Spacer()
                 }
             }
+            .scrollDismissesKeyboard(.interactively)
         }
         .navigationBarTitleDisplayMode(.inline)
     }

@@ -1,9 +1,14 @@
-
 import SwiftUI
 
 struct LearningOutlinePage: View {
-    let objective: LearningObjective
+    @State var objective: LearningObjective
     let accent: Color
+    @State var stageId: String
+    @State var chapterId: String
+    @State var topicId: String
+    
+    @State private var lesson: LessonDTO?
+    @State private var loading: Bool = true
     @Environment(\.presentationMode) var presentationMode
     
     var body: some View {
@@ -11,111 +16,148 @@ struct LearningOutlinePage: View {
             Color(hex: "#EAFDEF")
                 .ignoresSafeArea()
             
-            ScrollView(showsIndicators: false) {
-                VStack(alignment: .leading, spacing: 20) {
-                    
-                    // Illustration
-                    HStack {
-                        Spacer()
-                        Image("intro_illustration") // Placeholder for the mountain/person image
-                            .resizable()
-                            .scaledToFit()
-                            .frame(height: 200)
-                        Spacer()
-                    }
-                    .padding(.top)
-                    
-                    // Title
-                    Text("Course Title: Why Financial Literacy Matters in Everyday Life")
-                        .font(.title2)
-                        .bold() // Sansita bold typically
-                        .foregroundColor(Color(hex: "#01312D"))
-                        .multilineTextAlignment(.leading)
-                        .fixedSize(horizontal: false, vertical: true)
-                    
-                    // Outline Header
-                    HStack {
-                        Image(systemName: "note.text")
-                            .renderingMode(.original)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 24, height: 24)
-                            .foregroundColor(Color(hex: "#DDFEC5"))
-                            .padding(8)
-                            .background(Color(hex: "#DDFEC5"))
-                            .clipShape(Circle())
-                        
-                        Text("Learning Outline")
-                            .font(.headline)
-                            .bold()
-                            .foregroundColor(Color(hex: "#01312D"))
-                    }
-                    
-                    // Content Sections
-                    VStack(alignment: .leading, spacing: 24) {
-                        
-                        // Section 1
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("1. What is Financial Literacy?")
-                                .font(.headline)
-                                .underline()
-                                .foregroundColor(Color(hex: "#01312D"))
-                            
-                            Text("Financial literacy means having the knowledge and skills to manage money effectively.")
-                                .font(.body)
-                                .foregroundColor(Color(hex: "#01312D").opacity(0.8))
-                            
-                            Text("The five key areas: earning, spending, saving, investing, and protecting money.")
-                                .font(.body)
-                                .foregroundColor(Color(hex: "#01312D").opacity(0.8))
-                        }
-                        
-                        // Section 2 (Scenario)
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("A planner earning RWF 500,000 ends the month with over RWF 210,000 left plus RWF 25,000 saved, feeling relaxed and ready for the next month. The non-planner spends everything by week three, borrows RWF 50,000, and finishes broke, stressed, and in debt.")
-                                .font(.body)
-                                .foregroundColor(Color(hex: "#01312D").opacity(0.8))
-                                .padding(.vertical, 8)
-                        }
-                        
-                        // Takeaway
-                        VStack(alignment: .leading, spacing: 8) {
-                            Text("Takeaway:")
-                                .font(.headline)
-                                .underline()
-                                .foregroundColor(Color(hex: "#01312D"))
-                            
-                            Text("Financial literacy is not about being rich, it's about making informed choices with the money you have.")
-                                .font(.body)
-                                .foregroundColor(Color(hex: "#01312D").opacity(0.8))
-                        }
-                    }
-                    
-                    Spacer(minLength: 40)
-                    
-                    // Completed Button
-                    Button(action: {
-                        presentationMode.wrappedValue.dismiss()
-                    }) {
-                        Text("Completed")
-                            .font(.headline)
-                            .bold()
-                            .foregroundColor(Color(hex: "#72BF00"))
-                            .frame(maxWidth: .infinity)
-                            .padding()
-                            .background(Color(hex: "#DDFEC5"))
-                            .cornerRadius(30)
-                            .overlay(
-                                RoundedRectangle(cornerRadius: 30)
-                                    .stroke(Color(hex: "#72BF00"), lineWidth: 1)
-                            )
-                    }
-                    .padding(.bottom, 40)
+            if loading {
+                VStack {
+                    ProgressView("Loading content...")
+                    Text("Fetching your next lesson...")
+                        .font(.caption)
+                        .foregroundColor(.secondary)
                 }
-                .padding(24)
+                .padding()
+            } else if let lesson = lesson {
+                ScrollView(showsIndicators: false) {
+                    VStack(alignment: .leading, spacing: 20) {
+                        
+                        // Illustration
+                        HStack {
+                            Spacer()
+                            Image("MoneyMotivation") 
+                                .resizable()
+                                .scaledToFit()
+                                .frame(height: 200)
+                            Spacer()
+                        }
+                        .padding(.top)
+                        
+                        // Title
+                        Text(lesson.title)
+                            .font(.title2)
+                            .bold()
+                            .foregroundColor(Color(hex: "#1B2534"))
+                            .multilineTextAlignment(.leading)
+                            .fixedSize(horizontal: false, vertical: true)
+                        
+                        // Outline Header
+                        HStack {
+                            Image(systemName: "note.text")
+                                .renderingMode(.original)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 24, height: 24)
+                                .foregroundColor(Color(hex: "#DDFEC5"))
+                                .padding(8)
+                                .background(Color(hex: "#DDFEC5"))
+                                .clipShape(Circle())
+                            
+                            Text("Learning Outline")
+                                .font(.headline)
+                                .bold()
+                                .foregroundColor(Color(hex: "#1B2534"))
+                        }
+                        
+                        // Content Sections
+                        VStack(alignment: .leading, spacing: 24) {
+                            
+                            // Paragraph
+                            Text(lesson.paragraph)
+                                .font(.body)
+                                .foregroundColor(Color(hex: "#1B2534").opacity(0.8))
+                            
+                            // Takeaway
+                            VStack(alignment: .leading, spacing: 8) {
+                                Text("Takeaway:")
+                                    .font(.headline)
+                                    .underline()
+                                    .foregroundColor(Color(hex: "#1B2534"))
+                                
+                                Text(lesson.keyTakeaway)
+                                    .font(.body)
+                                    .foregroundColor(Color(hex: "#1B2534").opacity(0.8))
+                            }
+                        }
+                        
+                        Spacer(minLength: 40)
+                        
+                        // Completed Button
+                        Button(action: {
+                            Task {
+                                await completeAndNext()
+                            }
+                        }) {
+                            Text("Completed")
+                                .font(.headline)
+                                .bold()
+                                .foregroundColor(Color(hex: "#72BF00"))
+                                .frame(maxWidth: .infinity)
+                                .padding()
+                                .background(Color(hex: "#DDFEC5"))
+                                .cornerRadius(30)
+                                .overlay(
+                                    RoundedRectangle(cornerRadius: 30)
+                                        .stroke(Color(hex: "#72BF00"), lineWidth: 1)
+                                )
+                        }
+                        .padding(.bottom, 40)
+                    }
+                    .padding(24)
+                }
+                .scrollDismissesKeyboard(.interactively)
+            } else {
+                VStack {
+                    Text("Content not found.")
+                    Button("Retry") {
+                        Task { await loadLesson() }
+                    }
+                }
             }
         }
-        .navigationBarBackButtonHidden(false) // Standard back button is fine, or custom if requested
+        .navigationBarBackButtonHidden(false)
+        .task {
+            await loadLesson()
+        }
+    }
+    
+    private func loadLesson() async {
+        loading = true
+        do {
+            let lessons = try await LearningService.shared.fetchLessons(
+                stageId: stageId,
+                chapterId: chapterId,
+                topicId: topicId,
+                objectiveId: objective.backendId
+            )
+            lesson = lessons.first
+            loading = false
+        } catch {
+            if let urlError = error as? URLError, urlError.code == .cancelled {
+                return
+            }
+            print("Failed to load lesson content: \(error)")
+            loading = false
+        }
+    }
+
+    private func completeAndNext() async {
+        loading = true
+        do {
+            // 1. Mark current as complete
+            try await LearningService.shared.markObjectiveComplete(objectiveId: objective.backendId)
+            
+            // 2. Dismiss back to previous page
+            presentationMode.wrappedValue.dismiss()
+        } catch {
+            print("Failed to complete objective: \(error)")
+            presentationMode.wrappedValue.dismiss()
+        }
     }
 }
-

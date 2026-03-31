@@ -19,7 +19,7 @@ struct ToolsView: View {
                     HStack(spacing: 20) {
                         VStack(alignment: .leading, spacing: 10) {
                             Text("Learn, Practice, & Prosper")
-                                .font(.system(size: 20, weight: .bold))
+                                .font(.system(size: 24, weight: .bold))
                                 .foregroundColor(Color(hex: "#1B2534"))
                                 .fixedSize(horizontal: false, vertical: true)
                             
@@ -94,6 +94,7 @@ struct ToolsView: View {
                 }
                 .padding(.bottom, 20)
             }
+            .scrollDismissesKeyboard(.interactively)
         }
         // If RootView/MainTabs provides NavigationStack, this title might double up if not careful.
         // We removed .navigationTitle to allow custom header or inherit.

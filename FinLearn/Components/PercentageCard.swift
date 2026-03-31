@@ -28,16 +28,16 @@ struct PercentageCard: View {
                     
                   
                 Text(title)
-                    .font(.system(size:20 , weight:.bold))
-                    .foregroundColor(Color(hex:"#1B2534"))
+                    .font(AppTypography.learningProgress)
+                    .foregroundColor(.textColor)
             }
             Spacer()
-            CircularProgressBar(progress:.constant(progressNumber))
-                .frame(width:80, height:80)
+            CircularProgressBar(progress: .constant(progressNumber))
+                .frame(width: 120, height: 120)
         }
         .padding(24)
-        .frame(width:340)
-        .frame(height:158)
+        .frame(maxWidth: .infinity)
+        .frame(height: 200)
         .background(
             RoundedRectangle(cornerRadius:20)
                 .fill(Color(hex:"#C3FE58").opacity(0.5))

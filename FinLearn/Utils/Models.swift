@@ -21,23 +21,83 @@ struct UserProfile: Codable, Identifiable {
 // MARK: - Financial Models
 
 struct BudgetPlan: Codable, Identifiable {
-    let id: String
-    let month: String // e.g., "November 2025" or ISO date
-    let income: Double
-    let totalExpenses: Double
-    let savingsGoal: Double
-    let currency: String
+    var id: String?
+    var userId: String?
+    var monthIso: String // e.g., "2025-11"
+    var totalPlannedIncome: Double
+    var totalPlannedExpenses: Double
+    var actualTotalIncome: Double?
+    var actualTotalExpenses: Double?
+    var currency: String
+    var createdAt: Date?
+    var lastFollowUpDate: Date?
+    var incomeItems: [BudgetItem]?
+    var expenseItems: [BudgetItem]?
+    var emergencies: [Emergency]?
+    var isCompleted: Bool? // Marks if the budget period is over
     
-    var status: BudgetStatus {
-        if totalExpenses > income { return .overBudget }
-        if totalExpenses + savingsGoal <= income { return .onTrack }
-        return .warning
+    enum CodingKeys: String, CodingKey {
+        case id, userId, monthIso, totalPlannedIncome, totalPlannedExpenses, actualTotalIncome, actualTotalExpenses, currency, createdAt, lastFollowUpDate, incomeItems, expenseItems, emergencies, isCompleted
     }
     
-    enum BudgetStatus: String, Codable {
-        case onTrack = "On Track"
-        case warning = "Warning"
-        case overBudget = "Over Budget"
+    // UI Helpers (backwards compatibility or simplified access)
+    var income: Double { totalPlannedIncome }
+    var totalExpenses: Double { totalPlannedExpenses }
+    var month: String { monthIso }
+
+    var formattedDateRange: String {
+        let components = monthIso.components(separatedBy: "-")
+        guard components.count == 2, let year = components.first, let month = components.last else { return monthIso }
+        
+        let monthMap: [String: String] = [
+            "01": "JAN", "02": "FEB", "03": "MAR", "04": "APR", "05": "MAY", "06": "JUN",
+            "07": "JUL", "08": "AUG", "09": "SEP", "10": "OCT", "11": "NOV", "12": "DEC"
+        ]
+        
+        let mStr = monthMap[month] ?? month
+        let nextMonthInt = (Int(month) ?? 0) % 12 + 1
+        let nextMonth = String(format: "%02d", nextMonthInt)
+        let nmStr = monthMap[nextMonth] ?? nextMonth
+        let nextYear = (Int(month) == 12) ? String((Int(year) ?? 0) + 1) : year
+        
+        return "11 \(mStr) - 11 \(nmStr) \(nextYear)"
+    }
+}
+
+struct BudgetItem: Codable, Identifiable {
+    var id: String { category + "\(amount)" }
+    let category: String
+    let amount: Double
+}
+
+struct Emergency: Codable, Identifiable {
+    var id: String { title + "\(amount)" }
+    let title: String
+    let amount: Double
+}
+
+struct BudgetResult: Codable {
+    let dateRange: String
+    let totals: Totals
+    let percentages: Percentages
+    let expensesBreakdown: [ExpenseItem]
+    let status: String
+    
+    struct Totals: Codable {
+        let plannedIncome: Double
+        let plannedExpenses: Double
+        let actualIncome: Double
+        let actualExpenses: Double
+        let adjustedExpenses: Double
+    }
+    
+    struct Percentages: Codable {
+        let expenseAdherence: Double
+    }
+    
+    struct ExpenseItem: Codable {
+        let category: String
+        let amount: Double
     }
 }
 
@@ -62,11 +122,5 @@ struct LearningProgress: Codable, Identifiable {
     enum ContentType: String, Codable {
         case quiz
         case lesson
-    }
-    
-    enum CompletionStatus: String, Codable {
-        case notStarted
-        case inProgress
-        case completed
     }
 }

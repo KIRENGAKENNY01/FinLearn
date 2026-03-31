@@ -17,14 +17,14 @@ struct CircularProgressBar: View {
     
             
             Circle()
-                .trim(from:0.0, to:CGFloat(min(self.progress,1.0)))
+                .trim(from: 0.0, to: CGFloat(progress.isFinite ? min(max(Double(progress), 0.0), 1.0) : 0.0))
                 .stroke(style:StrokeStyle(lineWidth:16.0, lineCap:.round, lineJoin:.round))
                 .foregroundColor(Color(hex:"#72BF00"))
                 .rotationEffect(Angle(degrees:270))
                 .animation(.smooth(duration:1.8), value:progress)
     
             Text("\(Int(progress * 100))%")
-                            .font(.system(size: 22, weight: .bold))
+                            .font(.system(size: 24, weight: .bold))
                             .foregroundColor(Color(hex: "#1B2534"))
                             .background(
                                 Circle()

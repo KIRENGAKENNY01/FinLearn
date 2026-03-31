@@ -39,6 +39,8 @@ extension Color {
             opacity: Double(a) / 255
         )
     }
+    
+    static let textColor = Color(hex: "#1B2534")
 }
 
 
@@ -46,5 +48,54 @@ extension UIColor {
     convenience init(hex: String) {
         let color = Color(hex: hex)
         self.init(color)
+    }
+}
+
+extension View {
+    func hideKeyboard() {
+        UIApplication.shared.sendAction(#selector(UIResponder.resignFirstResponder), to: nil, from: nil, for: nil)
+    }
+}
+
+extension Int {
+    var formattedWithCommas: String {
+        let formatter = NumberFormatter()
+        formatter.numberStyle = .decimal
+        return formatter.string(from: NSNumber(value: self)) ?? "\(self)"
+    }
+}
+
+struct DateInput: View {
+    let title: String
+    @Binding var date: Date
+    var range: PartialRangeFrom<Date> = Date()...
+    
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            Text(title)
+                .font(.subheadline)
+                .bold()
+                .foregroundColor(Color(hex: "#01312D"))
+            
+            HStack {
+                DatePicker("", selection: $date, in: range, displayedComponents: .date)
+                    .datePickerStyle(.compact)
+                    .labelsHidden()
+                    .accentColor(Color(hex: "#72BF00"))
+                
+                Spacer()
+                
+                Image(systemName: "calendar")
+                    .foregroundColor(Color(hex: "#01312D"))
+                    .allowsHitTesting(false) // Let touches pass to the picker row if needed, though picker is on left
+            }
+            .padding()
+            .background(Color.white)
+            .cornerRadius(12)
+            .overlay(
+                RoundedRectangle(cornerRadius: 12)
+                    .stroke(Color.gray.opacity(0.2), lineWidth: 1)
+            )
+        }
     }
 }

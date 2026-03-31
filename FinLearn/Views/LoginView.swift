@@ -9,13 +9,16 @@ struct LoginView: View {
     var body: some View {
         
             VStack(spacing:49) {
-                VStack(alignment:.leading , spacing:8){
+                VStack(spacing: 8) {
                     Text("Welcome Back!")
-                        .font(.system(size: 30 , weight: .bold ))
+                        .appFont(AppTypography.largeTitle)
+                        .foregroundColor(.textColor)
                     Text("Provide your credentials")
+                        .appFont(AppTypography.body)
+                        .foregroundColor(.textColor.opacity(0.7))
                 }
-                .frame(maxWidth:.infinity , alignment:.leading)
-                .padding(.horizontal , 20)
+                .frame(maxWidth: .infinity, alignment: .center)
+                .padding(.horizontal, 20)
                 
             
                 VStack(spacing:48){
@@ -28,23 +31,27 @@ struct LoginView: View {
                         FormInput(
                             icon:"lock",
                             title:"Password",
-                            text:$password
+                            text:$password,
+                            isSecure: true
                         )
                         
                     }
                     
-                    Button(action: {
-                        // TODO: Add actual login logic here
-                        // For now, just authenticate
-                        appState.authenticate()
-                    }) {
-                        RippleButton(title:"Login", width:150 , height:50,size:18)
+                    RippleButton(title: "Login", width: 150, height: 50, size: 18) {
+                        appState.login(email: email, password: password)
                     }
                 }
                
             }
             .padding()
             .frame(maxWidth: .infinity , maxHeight:.infinity , alignment:.top)
+            .onTapGesture { hideKeyboard() }
+            .alert(item: Binding(
+                get: { appState.errorMessage.map { ErrorWrapper(error: $0) } },
+                set: { _ in appState.errorMessage = nil }
+            )) { wrapper in
+                Alert(title: Text("Error"), message: Text(wrapper.error), dismissButton: .default(Text("OK")))
+            }
     }
     
 

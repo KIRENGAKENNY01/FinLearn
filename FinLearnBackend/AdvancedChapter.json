@@ -1,0 +1,32 @@
+[
+  {
+    "id": "a_ch1",
+    "stageId": "advanced",
+    "title": "Investing Fundamentals",
+    "order": 1
+  },
+  {
+    "id": "a_ch2",
+    "stageId": "advanced",
+    "title": "Diversification & Risk",
+    "order": 2
+  },
+  {
+    "id": "a_ch3",
+    "stageId": "advanced",
+    "title": "Retirement Planning",
+    "order": 3
+  },
+  {
+    "id": "a_ch4",
+    "stageId": "advanced",
+    "title": "Wealth Building Strategies",
+    "order": 4
+  },
+  {                   
+    "id": "a_ch5",
+    "stageId": "advanced",
+    "title": "Financial Independence & Legacy",
+    "order": 5
+  }
+]

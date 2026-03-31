@@ -2,14 +2,13 @@ import SwiftUI
 
 struct ObjectivePage: View {
     let lesson: LessonItem
+    let topic: LearningObjective
     let accent: Color
+    let stageId: String
     
-    private let objectives: [LearningObjective] = [
-        LearningObjective(title: "Understand what financial literacy means", description: "Learn the core definition and why it matters for everyday decisions."),
-        LearningObjective(title: "Explain why financial knowledge is essential in daily life.", description: "Connect financial skills to real-world outcomes like saving and spending."),
-        LearningObjective(title: "Recognize the impact of poor financial decisions.", description: "Spot common pitfalls and how to avoid them."),
-        LearningObjective(title: "Identify simple ways to start improving financial literacy today.", description: "Actionable steps you can take immediately.")
-    ]
+    @State private var objectives: [LearningObjective] = []
+    @State private var loading: Bool = true
+    @State private var topicProgress: Double = 0.0
     
     var body: some View {
         ScrollView(showsIndicators: false) {
@@ -23,58 +22,77 @@ struct ObjectivePage: View {
                     .padding(.top, 12)
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Course Title:")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(.gray)
+                    Text("Topic Title:")
+                        .font(.system(size: 15, weight: .medium))
+                        .foregroundColor(Color(hex: "#1B2534").opacity(0.7))
                     
-                    Text(lesson.title)
-                        .font(.system(size: 22, weight: .bold))
-                        .foregroundColor(Color(hex: "#01312D"))
+                    Text(topic.title)
+                        .font(.system(size: 28, weight: .bold))
+                        .foregroundColor(Color(hex: "#1B2534"))
                         .fixedSize(horizontal: false, vertical: true)
-                    
-                  
                     
                     HStack(spacing:8) {
                         ZStack {
-                            
                             Circle()
                                 .fill(Color(hex: "#D6FDA3"))
                                 .frame(width: 35, height: 35)
                             
-                           
                             Image("mission")
                                 .resizable()
                                 .scaledToFit()
                                 .foregroundColor(Color(hex: "#A2ACBD"))
                                 .frame(width: 20, height: 20)
-                               
                         }
                         .frame(width: 35, height: 35)
                         
                         Text("Progress")
-                            .font(.system(size: 14 , weight: .light ))
-                                 
-         
+                            .font(.system(size: 15 , weight: .light ))
                     }
                     
-                    PercentageCard(title:"Completion of Course Objective",subhead:"Beginner",progressNumber:0.6 )
-
+                    PercentageCard(title: "Course Completion Progress", subhead: "Active Study", progressNumber: Float(topicProgress))
                 }
                 .padding(.horizontal, 20)
                 
                 VStack(alignment: .leading, spacing: 12) {
-                    Text("Learning Objectives")
-                        .font(.system(size: 18, weight: .bold))
-                        .foregroundColor(Color(hex: "#01312D"))
+                    HStack(spacing: 8) {
+                        Image(systemName: "target")
+                             .font(.system(size: 24))
+                             .foregroundColor(Color(hex: "#1B2534"))
+                        Text("Learning Objectives")
+                            .font(.headline)
+                            .bold()
+                            .foregroundColor(Color(hex: "#01312D"))
+                    }
+                    .padding(.bottom, 8)
                     
-                    LazyVStack(spacing: 12) {
-                        ForEach(objectives) { objective in
-                            NavigationLink {
-                                LearningOutlinePage(objective: objective, accent: accent)
-                            } label: {
-                                ObjectiveCard(objective: objective, accent: accent)
+                    if loading {
+                        ProgressView()
+                            .padding()
+                    } else if objectives.isEmpty {
+                        Text("No objectives found for this topic.")
+                            .foregroundColor(.secondary)
+                    } else {
+                        LazyVStack(spacing: 12) {
+                            ForEach(objectives) { objective in
+                                NavigationLink {
+                                    LearningOutlinePage(
+                                        objective: objective,
+                                        accent: accent,
+                                        stageId: stageId,
+                                        chapterId: lesson.backendId,
+                                        topicId: topic.backendId
+                                    )
+                                } label: {
+                                    ReusableCard(
+                                        icon: "coin",
+                                        title: objective.title,
+                                        finished: "Click to learn",
+                                        status: objective.status?.rawValue ?? ""
+                                    )
+                                }
+                                .buttonStyle(.plain)
+                                .disabled(objective.status == .locked)
                             }
-                            .buttonStyle(.plain)
                         }
                     }
                 }
@@ -85,39 +103,40 @@ struct ObjectivePage: View {
         .background(Color(hex: "#EAFDEF"))
         .navigationTitle("Objectives")
         .navigationBarTitleDisplayMode(.inline)
-    }
-}
-
-private struct ProgressRing: View {
-    let progress: Double
-    let accent: Color
-    
-    var body: some View {
-        ZStack {
-            Circle()
-                .stroke(accent.opacity(0.15), lineWidth: 12)
-            Circle()
-                .trim(from: 0, to: progress)
-                .stroke(accent, style: StrokeStyle(lineWidth: 12, lineCap: .round))
-                .rotationEffect(.degrees(-90))
-            
-            VStack(spacing: 4) {
-                Text("Completion")
-                    .font(.system(size: 14, weight: .semibold))
-                    .foregroundColor(Color(hex: "#01312D"))
-                Text("\(Int(progress * 100))%")
-                    .font(.system(size: 22, weight: .bold))
-                    .foregroundColor(accent)
-            }
+        .task {
+            await loadObjectives()
         }
     }
-}
-
-#Preview{
-    NavigationStack {
-        ObjectivePage(
-            lesson: LessonItem(title: "Why financial literacy matters in everyday life", paragraph:"Why financial literacy matters in everyday life" , objectivesCount: 4, status: "In Progress", duration: "15 min"),
-            accent: Color(hex: "#72BF00")
-        )
+    
+    private func loadObjectives() async {
+        loading = true
+        do {
+            let objectiveDTOs = try await LearningService.shared.fetchObjectives(
+                stageId: stageId,
+                chapterId: lesson.backendId,
+                topicId: topic.backendId
+            )
+            
+            // The backend returns TopicProgress in TopicResponse, but ObjectivePage 
+            // is already showing objectives. We can calculate progress locally here too.
+            let completedCount = objectiveDTOs.filter { $0.status == "completed" }.count
+            self.topicProgress = Double(completedCount) / Double(max(1, objectiveDTOs.count))
+            
+            objectives = objectiveDTOs.map { dto in
+                LearningObjective(
+                    backendId: dto.id ?? "",
+                    title: dto.title,
+                    description: dto.content,
+                    status: CompletionStatus(rawValue: dto.status ?? "locked")
+                )
+            }
+            loading = false
+        } catch {
+            if let urlError = error as? URLError, urlError.code == .cancelled {
+                return
+            }
+            print("Failed to load objectives: \(error)")
+            loading = false
+        }
     }
 }

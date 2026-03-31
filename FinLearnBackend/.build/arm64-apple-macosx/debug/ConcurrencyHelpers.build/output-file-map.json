@@ -1,0 +1,19 @@
+{
+  "": {
+    "swift-dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/master.swiftdeps"
+  },
+  "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-service-lifecycle/Sources/ConcurrencyHelpers/Lock.swift": {
+    "dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/Lock.d",
+    "object": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/Lock.swift.o",
+    "swiftmodule": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/Lock~partial.swiftmodule",
+    "swift-dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/Lock.swiftdeps",
+    "diagnostics": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/Lock.dia"
+  },
+  "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-service-lifecycle/Sources/ConcurrencyHelpers/LockedValueBox.swift": {
+    "dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/LockedValueBox.d",
+    "object": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/LockedValueBox.swift.o",
+    "swiftmodule": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/LockedValueBox~partial.swiftmodule",
+    "swift-dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/LockedValueBox.swiftdeps",
+    "diagnostics": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ConcurrencyHelpers.build/LockedValueBox.dia"
+  }
+}

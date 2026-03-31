@@ -1,0 +1,317 @@
+[
+  {
+    "id": "obj_a_ch1_t1_1",
+    "topicId": "a_ch1_t1",
+    "title": "Define investing",
+    "content": "Investing is putting money into assets expecting them to grow in value or generate income over time.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch1_t1_2",
+    "topicId": "a_ch1_t1",
+    "title": "Understand returns",
+    "content": "Returns come from capital appreciation, dividends, interest, or rental income.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch1_t1_3",
+    "topicId": "a_ch1_t1",
+    "title": "Differentiate investing from saving",
+    "content": "Investing seeks growth with risk; saving focuses on safety and liquidity.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch1_t2_1",
+    "topicId": "a_ch1_t2",
+    "title": "Understand stocks",
+    "content": "Stocks represent ownership in companies and offer growth potential through price increase and dividends.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch1_t2_2",
+    "topicId": "a_ch1_t2",
+    "title": "Understand bonds",
+    "content": "Bonds are loans to governments or companies that pay regular interest and return principal at maturity.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch1_t2_3",
+    "topicId": "a_ch1_t2",
+    "title": "Explore other assets",
+    "content": "Real estate, mutual funds, ETFs, and commodities provide different risk-return profiles.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch1_t3_1",
+    "topicId": "a_ch1_t3",
+    "title": "Time in the market",
+    "content": "Longer investment periods generally reduce risk and increase potential returns.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch1_t3_2",
+    "topicId": "a_ch1_t3",
+    "title": "Risk vs reward relationship",
+    "content": "Higher potential returns usually come with higher risk of loss.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch1_t3_3",
+    "topicId": "a_ch1_t3",
+    "title": "Set clear goals",
+    "content": "Investment decisions should align with specific financial objectives and time horizons.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch2_t1_1",
+    "topicId": "a_ch2_t1",
+    "title": "Identify types of risk",
+    "content": "Market, inflation, interest rate, liquidity, and business-specific risks affect investments.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch2_t1_2",
+    "topicId": "a_ch2_t1",
+    "title": "Measure investment risk",
+    "content": "Volatility, standard deviation, and beta help quantify how much an investment fluctuates.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch2_t1_3",
+    "topicId": "a_ch2_t1",
+    "title": "Assess personal risk tolerance",
+    "content": "Your ability and willingness to handle investment losses determines suitable strategies.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch2_t2_1",
+    "topicId": "a_ch2_t2",
+    "title": "Spread across asset classes",
+    "content": "Combining stocks, bonds, real estate, and cash reduces overall portfolio risk.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch2_t2_2",
+    "topicId": "a_ch2_t2",
+    "title": "Geographic diversification",
+    "content": "Investing in Rwanda, East Africa, and global markets reduces country-specific risk.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch2_t2_3",
+    "topicId": "a_ch2_t2",
+    "title": "Regular portfolio rebalancing",
+    "content": "Adjusting allocations back to target percentages maintains desired risk level.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch2_t3_1",
+    "topicId": "a_ch2_t3",
+    "title": "Use stop-loss strategies",
+    "content": "Automatic selling at predetermined prices limits potential losses.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch2_t3_2",
+    "topicId": "a_ch2_t3",
+    "title": "Hedging techniques",
+    "content": "Options and other derivatives can protect against significant market declines.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch2_t3_3",
+    "topicId": "a_ch2_t3",
+    "title": "Maintain emergency reserves",
+    "content": "Cash reserves prevent forced selling of investments during emergencies.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch3_t1_1",
+    "topicId": "a_ch3_t1",
+    "title": "Estimate retirement expenses",
+    "content": "Project monthly living costs, healthcare, and lifestyle in retirement years.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch3_t1_2",
+    "topicId": "a_ch3_t1",
+    "title": "Account for inflation",
+    "content": "Future expenses will be higher due to rising prices over decades.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch3_t1_3",
+    "topicId": "a_ch3_t1",
+    "title": "Factor in life expectancy",
+    "content": "Plan for 25–35 years of retirement income depending on current age.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch3_t2_1",
+    "topicId": "a_ch3_t2",
+    "title": "Understand RSSB pension",
+    "content": "Rwanda Social Security Board provides mandatory retirement benefits for formal workers.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch3_t2_2",
+    "topicId": "a_ch3_t2",
+    "title": "Use voluntary savings plans",
+    "content": "Personal pension schemes and retirement investment accounts offer tax advantages.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch3_t2_3",
+    "topicId": "a_ch3_t2",
+    "title": "Consider annuities",
+    "content": "Insurance products that convert savings into guaranteed lifetime income.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch3_t3_1",
+    "topicId": "a_ch3_t3",
+    "title": "Apply safe withdrawal rates",
+    "content": "The 4% rule suggests withdrawing 4% of portfolio in first year, adjusted for inflation.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch3_t3_2",
+    "topicId": "a_ch3_t3",
+    "title": "Sequence of returns risk",
+    "content": "Poor market returns early in retirement can significantly impact portfolio longevity.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch3_t3_3",
+    "topicId": "a_ch3_t3",
+    "title": "Flexible withdrawal strategies",
+    "content": "Adjust withdrawals based on market performance and personal needs.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch4_t1_1",
+    "topicId": "a_ch4_t1",
+    "title": "Understand compounding",
+    "content": "Earnings generate additional earnings, creating exponential growth over time.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch4_t1_2",
+    "topicId": "a_ch4_t1",
+    "title": "Start investing early",
+    "content": "Time is the most powerful factor in building substantial wealth.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch4_t1_3",
+    "topicId": "a_ch4_t1",
+    "title": "Reinvest returns",
+    "content": "Dividends and interest reinvested accelerate the compounding effect.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch4_t2_1",
+    "topicId": "a_ch4_t2",
+    "title": "Age-based allocation",
+    "content": "Younger investors can afford more stocks; older investors shift toward bonds.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch4_t2_2",
+    "topicId": "a_ch4_t2",
+    "title": "Target-date approach",
+    "content": "Automatically adjusts asset mix as retirement date approaches.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch4_t2_3",
+    "topicId": "a_ch4_t2",
+    "title": "Tax-efficient placement",
+    "content": "Place tax-inefficient investments in tax-advantaged accounts when possible.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch4_t3_1",
+    "topicId": "a_ch4_t3",
+    "title": "Value investing approach",
+    "content": "Buy quality assets when they are undervalued relative to fundamentals.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch4_t3_2",
+    "topicId": "a_ch4_t3",
+    "title": "Dividend growth strategy",
+    "content": "Focus on companies that consistently increase dividend payments.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch4_t3_3",
+    "topicId": "a_ch4_t3",
+    "title": "Passive vs active management",
+    "content": "Low-cost index investing often outperforms active stock picking over long periods.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch5_t1_1",
+    "topicId": "a_ch5_t1",
+    "title": "Calculate FI number",
+    "content": "Financial independence number is typically 25–30 times annual expenses.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch5_t1_2",
+    "topicId": "a_ch5_t1",
+    "title": "Increase savings rate",
+    "content": "Higher percentage of income saved accelerates path to independence.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch5_t1_3",
+    "topicId": "a_ch5_t1",
+    "title": "Build multiple income streams",
+    "content": "Diversified income reduces reliance on single job or investment.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch5_t2_1",
+    "topicId": "a_ch5_t2",
+    "title": "Create a will",
+    "content": "Legal document specifying how assets should be distributed after death.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch5_t2_2",
+    "topicId": "a_ch5_t2",
+    "title": "Use trusts when appropriate",
+    "content": "Trusts can provide control, tax benefits, and protection for heirs.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch5_t2_3",
+    "topicId": "a_ch5_t2",
+    "title": "Update beneficiaries",
+    "content": "Regularly review and update beneficiary designations on accounts.",
+    "order": 3
+  },
+  {
+    "id": "obj_a_ch5_t3_1",
+    "topicId": "a_ch5_t3",
+    "title": "Teach financial literacy",
+    "content": "Educating children and grandchildren about money builds lasting wealth.",
+    "order": 1
+  },
+  {
+    "id": "obj_a_ch5_t3_2",
+    "topicId": "a_ch5_t3",
+    "title": "Strategic gifting",
+    "content": "Giving assets during lifetime can reduce estate taxes and help family.",
+    "order": 2
+  },
+  {
+    "id": "obj_a_ch5_t3_3",
+    "topicId": "a_ch5_t3",
+    "title": "Philanthropic legacy",
+    "content": "Establishing charitable giving creates impact beyond family wealth.",
+    "order": 3
+  }
+]

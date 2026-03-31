@@ -1,0 +1,3 @@
+module ServiceLifecycleTestKit {
+    header "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/ServiceLifecycleTestKit.build/include/ServiceLifecycleTestKit-Swift.h"
+}

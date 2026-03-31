@@ -9,91 +9,95 @@ struct ReusableCard: View {
     let status:String
     
     
-    private var statusColor: Color {
-            switch status.lowercased() {
-            case "completed", "finished":
-                return Color(hex: "#72BF00")  // Green
-            case "ongoing", "in progress":
-                return Color(hex: "#FFC107")  // Amber
-            case "not yet", "not started":
-                return Color(hex: "#2196F3")  // Blue
-            default:
-                return Color.gray             // Fallback
-            }
-        }
+    private var isLocked: Bool {
+        status.lowercased() == "locked"
+    }
     
+    private var isCompleted: Bool {
+        status.lowercased() == "completed" || status.lowercased() == "finished"
+    }
+    
+    private var statusColor: Color {
+        switch status.lowercased() {
+        case "completed", "finished": return Color(hex: "#72BF00")
+        case "ongoing", "in progress": return Color(hex: "#FFD700")
+        case "locked": return Color.gray
+        default: return Color.gray
+        }
+    }
+
     var body: some View {
-        
         HStack(){
             HStack(alignment:.center, spacing:20 ) {
                 ZStack {
-                    
                     Circle()
-                        .fill(Color(hex: "#01312D"))
+                        .fill(isLocked ? Color.gray.opacity(0.3) : Color(hex: "#1B2534"))
                         .frame(width: 50, height: 50)
                     
-                    
-                    Image(icon)
+                    Image(isLocked ? "lock.fill" : icon) 
                         .resizable()
                         .renderingMode(.template)
                         .scaledToFit()
-                        .foregroundColor(Color(hex:"#FFFFFF"))
-                        .frame(width: 30, height: 30)
-                    
+                        .foregroundColor(isLocked ? .gray : Color(hex:"#FFFFFF"))
+                        .frame(width: 25, height: 25)
                 }
                 .frame(width: 35, height: 35)
                 
                 VStack(alignment:.leading  ,spacing:5){
                     Text(title)
-                        .font(.system(size: 14 , weight:.bold ))
+                        .font(.system(size: 17 , weight:.bold ))
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
+                        .foregroundColor(isLocked ? .gray : Color(hex: "#1B2534"))
                     
-                    HStack(spacing:2){
-                        Text(finished)
-                            .font(.system(size: 12 , weight:.light ))
-                            .lineLimit(nil)
-                            .multilineTextAlignment(.leading)
-                            .fixedSize(horizontal: false, vertical: true)
-                        
-                        
-                        HStack(spacing:8){
-                            Circle()
-                                .fill(statusColor)
-                                .frame(width:8 , height:8)
-                            Text(status)
-                                .font(.system(size:12, weight:.light))
-                                .foregroundColor(Color(hex:"#1B2534"))
-                               
-                        }.frame(width:90 , height:15)
+                    if !finished.isEmpty || !status.isEmpty {
+                        HStack(spacing:2){
+                            Text(isLocked ? "Locked" : finished)
+                                .font(.system(size: 13 , weight: .light ))
+                                .foregroundColor(isLocked ? .gray : Color(hex: "#1B2534"))
+                                .lineLimit(nil)
+                                .multilineTextAlignment(.leading)
+                                .fixedSize(horizontal: false, vertical: true)
+                            
+                            if !isLocked {
+                                HStack(spacing:8){
+                                    Circle()
+                                        .fill(statusColor)
+                                        .frame(width:8 , height:8)
+                                    Text(status)
+                                        .font(.system(size:13, weight:.light))
+                                        .foregroundColor(Color(hex:"#1B2534"))
+                                }.frame(width:90 , height:15)
+                            }
+                        }
                     }
                 }
-                
             }
             
             Spacer()
             
-            Image("chevron")
-                .resizable()
-                .scaledToFit()
-                .frame(width: 20, height: 20)
-            
-            
-            
-            
+            if !isLocked {
+                Image(systemName: "chevron.right")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 15, height: 15)
+                    .foregroundColor(.black)
+            } else {
+                Image(systemName: "lock.fill")
+                    .foregroundColor(.gray)
+            }
         }
         .padding(24)
-        .frame(maxWidth:340, minHeight: 100, alignment: .leading)
+        .frame(maxWidth: .infinity, minHeight: 100, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius:20)
                 .fill(
-                    (status.lowercased() == "completed" || status.lowercased() == "finished")
-                    ? Color(hex: "#D6FDA3")
-                    : Color(hex: "#FFFFFF").opacity(0.5)
+                    isCompleted ? Color(hex: "#D6FDA3") : (isLocked ? Color.white : Color(hex: "#F2FCEC"))
                 )
+                .shadow(color: Color.black.opacity(isLocked ? 0.05 : 0), radius: 5, x: 0, y: 2)
         )
-        
-        
+        .animation(.spring(), value: status)
+        .contentShape(Rectangle())
     }
 }
 

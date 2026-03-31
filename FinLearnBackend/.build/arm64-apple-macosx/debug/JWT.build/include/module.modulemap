@@ -1,0 +1,3 @@
+module JWT {
+    header "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/JWT.build/include/JWT-Swift.h"
+}

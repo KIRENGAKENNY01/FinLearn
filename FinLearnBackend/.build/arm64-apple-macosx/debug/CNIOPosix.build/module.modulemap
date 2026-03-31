@@ -1,0 +1,4 @@
+module CNIOPosix {
+    umbrella header "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/CNIOPosix/include/CNIOPosix.h"
+    export *
+}

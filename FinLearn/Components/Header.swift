@@ -6,18 +6,19 @@ struct Header:View {
     
     var body: some View {
         HStack(){
-            VStack(alignment: .leading){
+            VStack(alignment: .leading) {
                 Text("Hello")
-                    .font(.system(size:24 ,weight:.light))
-                HStack(){
+                    .font(.system(size: 24, weight: .light))
+                    .foregroundColor(Color(hex: "#1B2534"))
+                HStack {
                     Text(firstName)
-                        .font(.system(size:24 ,weight:.bold))
+                        .font(.system(size: 24, weight: .bold))
+                        .foregroundColor(Color(hex: "#1B2534"))
                     Image("hy")
                         .resizable()
                         .scaledToFit()
-                        .frame(width: 20, height: 20)
+                        .frame(width: 24, height: 24)
                 }
-                
             }
              Spacer()
             
@@ -37,7 +38,6 @@ struct Header:View {
             }
            
         }
-        .padding(32)
         
     }
 

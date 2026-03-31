@@ -16,13 +16,13 @@ struct DashboardToolCard: View {
             
             VStack(spacing: 8) {
                 Text(title)
-                    .font(.system(size: 16, weight: .bold))
-                    .foregroundColor(Color(hex: "#01312D"))
+                    .font(.system(size: 17, weight: .bold))
+                    .foregroundColor(Color(hex: "#1B2534"))
                     .multilineTextAlignment(.center)
                 
                 Text(description)
-                    .font(.system(size: 12))
-                    .foregroundColor(.gray)
+                    .font(.system(size: 13))
+                    .foregroundColor(Color(hex: "#1B2534").opacity(0.7))
                     .multilineTextAlignment(.center)
                     .lineLimit(3)
             }

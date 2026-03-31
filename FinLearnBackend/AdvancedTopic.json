@@ -1,0 +1,92 @@
+[
+  {
+    "id": "a_ch1_t1",
+    "chapterId": "a_ch1",
+    "title": "What Is Investing?",
+    "order": 1
+  },
+  {
+    "id": "a_ch1_t2",
+    "chapterId": "a_ch1",
+    "title": "Types of Investments",
+    "order": 2
+  },
+  {
+    "id": "a_ch1_t3",
+    "chapterId": "a_ch1",
+    "title": "Core Investment Principles",
+    "order": 3
+  },
+  {
+    "id": "a_ch2_t1",
+    "chapterId": "a_ch2",
+    "title": "Understanding Investment Risk",
+    "order": 1
+  },
+  {
+    "id": "a_ch2_t2",
+    "chapterId": "a_ch2",
+    "title": "Diversification Strategies",
+    "order": 2
+  },
+  {
+    "id": "a_ch2_t3",
+    "chapterId": "a_ch2",
+    "title": "Managing and Reducing Risk",
+    "order": 3
+  },
+  {
+    "id": "a_ch3_t1",
+    "chapterId": "a_ch3",
+    "title": "Retirement Needs Assessment",
+    "order": 1
+  },
+  {
+    "id": "a_ch3_t2",
+    "chapterId": "a_ch3",
+    "title": "Retirement Savings Vehicles",
+    "order": 2
+  },
+  {
+    "id": "a_ch3_t3",
+    "chapterId": "a_ch3",
+    "title": "Retirement Withdrawal Planning",
+    "order": 3
+  },
+  {
+    "id": "a_ch4_t1",
+    "chapterId": "a_ch4",
+    "title": "Power of Compound Growth",
+    "order": 1
+  },
+  {
+    "id": "a_ch4_t2",
+    "chapterId": "a_ch4",
+    "title": "Asset Allocation Strategies",
+    "order": 2
+  },
+  {
+    "id": "a_ch4_t3",
+    "chapterId": "a_ch4",
+    "title": "Advanced Wealth Building Approaches",
+    "order": 3
+  },
+  {
+    "id": "a_ch5_t1",
+    "chapterId": "a_ch5",
+    "title": "Path to Financial Independence",
+    "order": 1
+  },
+  {
+    "id": "a_ch5_t2",
+    "chapterId": "a_ch5",
+    "title": "Estate & Legacy Planning",
+    "order": 2
+  },
+  {
+    "id": "a_ch5_t3",
+    "chapterId": "a_ch5",
+    "title": "Building Generational Wealth",
+    "order": 3
+  }
+]

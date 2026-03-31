@@ -1,0 +1,3 @@
+module InMemoryLogging {
+    header "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/InMemoryLogging.build/include/InMemoryLogging-Swift.h"
+}

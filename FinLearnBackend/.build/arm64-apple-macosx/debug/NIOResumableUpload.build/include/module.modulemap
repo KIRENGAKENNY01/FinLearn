@@ -1,0 +1,3 @@
+module NIOResumableUpload {
+    header "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/NIOResumableUpload.build/include/NIOResumableUpload-Swift.h"
+}

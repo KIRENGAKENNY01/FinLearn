@@ -1,0 +1,3 @@
+module _NIOFileSystemFoundationCompat {
+    header "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/_NIOFileSystemFoundationCompat.build/include/_NIOFileSystemFoundationCompat-Swift.h"
+}

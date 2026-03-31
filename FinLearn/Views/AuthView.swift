@@ -2,8 +2,6 @@ import SwiftUI
 
 struct AuthView: View {
     @EnvironmentObject var appState: AppState
-    enum Tab {case login , signup}
-    @State private var selectedTab: Tab = .login
     
     var body: some View {
         ZStack{
@@ -16,16 +14,16 @@ struct AuthView: View {
                 HStack {
                     AuthTabButton(
                         title:"Sign in",
-                        isActive: selectedTab == .login
+                        isActive: appState.currentAuthTab == .login
                     ){
-                        selectedTab = .login
+                        appState.currentAuthTab = .login
                     }
                     
                     AuthTabButton(
                         title:"Signup",
-                        isActive: selectedTab == .signup
+                        isActive: appState.currentAuthTab == .signup
                     ){
-                        selectedTab = .signup
+                        appState.currentAuthTab = .signup
                     }
                 }
                 .padding(.vertical, 7)
@@ -39,11 +37,11 @@ struct AuthView: View {
           
                 
                 VStack{
-                    if selectedTab == .login {
+                    if appState.currentAuthTab == .login {
                         LoginView()
                             .padding(.top,38)
                     }
-                    if selectedTab == .signup {
+                    if appState.currentAuthTab == .signup {
                         Signup()
                             .padding(.top,38)
                     }

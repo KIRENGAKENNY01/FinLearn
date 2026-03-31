@@ -1,0 +1,12 @@
+{
+  "": {
+    "swift-dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/_NIOBase64.build/master.swiftdeps"
+  },
+  "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOBase64/Base64.swift": {
+    "dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/_NIOBase64.build/Base64.d",
+    "object": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/_NIOBase64.build/Base64.swift.o",
+    "swiftmodule": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/_NIOBase64.build/Base64~partial.swiftmodule",
+    "swift-dependencies": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/_NIOBase64.build/Base64.swiftdeps",
+    "diagnostics": "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/_NIOBase64.build/Base64.dia"
+  }
+}

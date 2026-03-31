@@ -26,21 +26,24 @@ struct CurrentChapter:View {
                     .frame(width: 35, height: 35)
                     
                     Text("Current Chapter")
-                        .font(.system(size: 14 , weight: .light ))
+                        .font(.system(size: 13 , weight: .light ))
+                        .foregroundColor(.textColor)
                              
      
                 }
                 
                
                 Text(title)
-                    .font(.system(size: 18 , weight: .bold ))
+                    .font(.system(size: 17 , weight: .bold ))
                     .lineLimit(nil)
                     .multilineTextAlignment(.leading)
+                    .foregroundColor(.textColor)
                  Text(paragraph)
-                    .font(.system(size:16))
+                    .font(.system(size:17))
+                    .foregroundColor(.textColor)
                 
                 NavigationLink(destination: LearnView()) {
-                    RippleButton(title:"Continue", width:100 , height:30,size:12)
+                    RippleButton(title:"Continue", width:100 , height:30,size:13)
                     
                 }
             }

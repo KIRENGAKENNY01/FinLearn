@@ -1,0 +1,41 @@
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Array+FileSystem.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/ArraySlice+FileSystem.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/BufferedReader.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/BufferedWriter.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/ByteBuffer+FileSystem.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/ByteCount.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Convenience.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/DirectoryEntries.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/DirectoryEntry.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Exports.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileChunks.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileHandle.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileHandleProtocol.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileInfo.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileSystem.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileSystemError+Syscall.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileSystemError.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileSystemProtocol.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/FileType.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/IOStrategy.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/BufferedOrAnyStream.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/BufferedStream.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/Cancellation.swift
+'/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/Concurrency Primitives/TokenBucket.swift'
+'/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/Concurrency Primitives/UnsafeTransfer.swift'
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/ParallelDirCopy.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/ParallelRemoval.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/String+UnsafeUnititializedCapacity.swift
+'/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/System Calls/CInterop.swift'
+'/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/System Calls/Errno.swift'
+'/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/System Calls/FileDescriptor+Syscalls.swift'
+'/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/System Calls/Mocking.swift'
+'/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/System Calls/Syscall.swift'
+'/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/System Calls/Syscalls.swift'
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/SystemFileHandle.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/Internal/Utilities.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/NIOFilePath.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/NIOFileSystemSendableMetatype.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/OpenOptions.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio/Sources/_NIOFileSystem/String+FileSystem.swift
+/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/arm64-apple-macosx/debug/_NIOFileSystem.build/DerivedSources/resource_bundle_accessor.swift

@@ -16,10 +16,12 @@ struct LearningLevel: Identifiable {
     let accent: Color
     let progress: Float
     let lessons: [LessonItem]
+    let status: String
 }
 
 struct LessonItem: Identifiable {
     let id = UUID()
+    let backendId: String
     let title: String
     let paragraph: String
     let objectivesCount: Int
@@ -27,10 +29,27 @@ struct LessonItem: Identifiable {
     let duration: String
 }
 
+enum CompletionStatus: String, Codable {
+    case locked
+    case notStarted
+    case ongoing
+    case completed
+}
+
 struct LearningObjective: Identifiable {
-    let id = UUID()
+    let id: UUID
+    let backendId: String
     let title: String
     let description: String
+    let status: CompletionStatus?
+    
+    init(id: UUID = UUID(), backendId: String = "", title: String, description: String, status: CompletionStatus? = nil) {
+        self.id = id
+        self.backendId = backendId
+        self.title = title
+        self.description = description
+        self.status = status
+    }
 }
 
 // MARK: - Cards
@@ -46,8 +65,8 @@ struct LevelCard: View {
             VStack(alignment: .leading, spacing: 12) {
                 HStack {
                     Text(level.type.rawValue)
-                        .font(.system(size: 16, weight: .semibold))
-                        .foregroundColor(Color(hex: "#01312D"))
+                        .appFont(AppTypography.headline)
+                        .foregroundColor(.textColor)
                         .padding(.horizontal, 12)
                         .padding(.vertical, 6)
                         .background(Color.white.opacity(0.8))
@@ -56,8 +75,8 @@ struct LevelCard: View {
                     Spacer()
                     
                     Text(level.duration)
-                        .font(.system(size: 12, weight: .medium))
-                        .foregroundColor(Color(hex: "#01312D"))
+                        .appFont(AppTypography.footnote)
+                        .foregroundColor(.textColor)
                         .padding(.horizontal, 10)
                         .padding(.vertical, 6)
                         .background(Color.white.opacity(0.8))
@@ -65,8 +84,8 @@ struct LevelCard: View {
                 }
                 
                 Text(level.title)
-                    .font(.system(size: 20, weight: .bold))
-                    .foregroundColor(Color(hex: "#01312D"))
+                    .appFont(AppTypography.title1)
+                    .foregroundColor(.textColor)
                     .fixedSize(horizontal: false, vertical: true)
                 
            
@@ -75,13 +94,13 @@ struct LevelCard: View {
                 
                 HStack {
                     Label("\(level.lessons.count) lessons", systemImage: "book.fill")
-                        .font(.system(size: 14, weight: .medium))
-                        .foregroundColor(Color(hex: "#01312D"))
+                        .appFont(AppTypography.subhead)
+                        .foregroundColor(.textColor)
                     
                     Spacer()
                     
                     Image(systemName: "chevron.right")
-                        .foregroundColor(Color(hex: "#01312D"))
+                        .foregroundColor(.textColor)
                 }
                 .padding(.top, 8)
             }
@@ -111,19 +130,19 @@ struct LessonCard: View {
             
             VStack(alignment: .leading, spacing: 6) {
                 Text(lesson.title)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(Color(hex: "#01312D"))
+                    .appFont(AppTypography.headline)
+                    .foregroundColor(.textColor)
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Text("\(lesson.objectivesCount) objectives • \(lesson.duration)")
-                    .font(.system(size: 13))
-                    .foregroundColor(.gray)
+                    .appFont(AppTypography.footnote)
+                    .foregroundColor(.textColor.opacity(0.7))
             }
             
             Spacer()
             
             Text(lesson.status)
-                .font(.system(size: 12, weight: .medium))
+                .font(.system(size: 13, weight: .medium))
                 .foregroundColor(accent)
                 .padding(.horizontal, 10)
                 .padding(.vertical, 6)
@@ -131,7 +150,7 @@ struct LessonCard: View {
                 .cornerRadius(12)
             
             Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
+                .foregroundColor(Color(hex: "#1B2534").opacity(0.5))
         }
         .padding()
         .background(Color.white)
@@ -158,20 +177,20 @@ struct ObjectiveCard: View {
             
             VStack(alignment: .leading, spacing: 6) {
                 Text(objective.title)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(Color(hex: "#01312D"))
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(Color(hex: "#1B2534"))
                     .fixedSize(horizontal: false, vertical: true)
                 
                 Text(objective.description)
                     .font(.system(size: 13))
-                    .foregroundColor(.gray)
+                    .foregroundColor(Color(hex: "#1B2534").opacity(0.7))
                     .lineLimit(2)
             }
             
             Spacer()
             
             Image(systemName: "chevron.right")
-                .foregroundColor(.gray)
+                .foregroundColor(Color(hex: "#1B2534").opacity(0.5))
         }
         .padding()
         .background(Color.white)
@@ -197,12 +216,12 @@ struct ToolCard: View {
             }
             
             Text(title)
-                .font(.system(size: 16, weight: .semibold))
-                .foregroundColor(Color(hex: "#01312D"))
+                .font(.system(size: 17, weight: .semibold))
+                .foregroundColor(Color(hex: "#1B2534"))
             
             Text(description)
                 .font(.system(size: 13))
-                .foregroundColor(.gray)
+                .foregroundColor(Color(hex: "#1B2534").opacity(0.7))
                 .fixedSize(horizontal: false, vertical: true)
         }
         .padding()
@@ -225,7 +244,7 @@ struct LeaderboardRow: View {
     var body: some View {
         HStack(spacing: 12) {
             Text("#\(rank)")
-                .font(.system(size: 16, weight: .bold))
+                .font(.system(size: 17, weight: .bold))
                 .foregroundColor(accent)
                 .frame(width: 36, height: 36)
                 .background(accent.opacity(0.15))
@@ -233,8 +252,8 @@ struct LeaderboardRow: View {
             
             VStack(alignment: .leading, spacing: 6) {
                 Text(name)
-                    .font(.system(size: 16, weight: .semibold))
-                    .foregroundColor(Color(hex: "#01312D"))
+                    .font(.system(size: 17, weight: .semibold))
+                    .foregroundColor(Color(hex: "#1B2534"))
                 
                 ProgressView(value: progress)
                     .progressViewStyle(.linear)
@@ -244,7 +263,7 @@ struct LeaderboardRow: View {
             Spacer()
             
             Text("\(Int(progress * 100))%")
-                .font(.system(size: 14, weight: .semibold))
+                .font(.system(size: 15, weight: .semibold))
                 .foregroundColor(accent)
         }
         .padding()
@@ -263,7 +282,8 @@ struct LeaderboardRow: View {
             gradient: [Color(hex: "#EAFDEF"), Color(hex: "#C8F7B9")],
             accent: Color(hex: "#72BF00"),
             progress: Float(0.2),
-            lessons: []
+            lessons: [],
+            status: "ongoing"
         )
     )
     .padding()

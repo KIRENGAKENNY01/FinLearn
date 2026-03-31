@@ -1,0 +1,6 @@
+dependencies: \
+  /Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/jwt-kit/Sources/CJWTKitBoringSSL/include/module.modulemap \
+  /Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/jwt-kit/Sources/CJWTKitBoringSSL/third_party/fiat/asm/fiat_curve25519_adx_mul.S \
+  /Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/jwt-kit/Sources/CJWTKitBoringSSL/include/CJWTKitBoringSSL_asm_base.h \
+  /Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/jwt-kit/Sources/CJWTKitBoringSSL/include/CJWTKitBoringSSL_target.h \
+  /Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/jwt-kit/Sources/CJWTKitBoringSSL/include/CJWTKitBoringSSL_boringssl_prefix_symbols_asm.h

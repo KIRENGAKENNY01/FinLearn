@@ -35,7 +35,7 @@ struct Advanced: View {
          
                                 HStack {
                                     Text("Chapters")
-                                        .font(.system(size: 20, weight: .bold))
+                                        .font(.system(size: 24, weight: .bold))
                                         .foregroundStyle(Color(hex: "#1B2534"))
                                     
                                     Spacer()

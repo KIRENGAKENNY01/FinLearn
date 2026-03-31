@@ -1,0 +1,4 @@
+module CNIOExtrasZlib {
+    umbrella header "/Users/rcalab/Desktop/FinLearn/FinLearnBackend/.build/checkouts/swift-nio-extras/Sources/CNIOExtrasZlib/include/CNIOExtrasZlib.h"
+    export *
+}

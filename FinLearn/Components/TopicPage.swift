@@ -14,7 +14,7 @@ struct TopicPage: View {
                 ZStack {
                     
                     Circle()
-                        .fill(Color(hex: "#01312D"))
+                        .fill(Color(hex: "#1B2534"))
                         .frame(width: 50, height: 50)
                     
                     
@@ -30,7 +30,7 @@ struct TopicPage: View {
                 
                 VStack(alignment:.leading  ,spacing:5){
                     Text(title)
-                        .font(.system(size: 14 , weight:.bold ))
+                        .font(.system(size: 17 , weight:.bold ))
                         .multilineTextAlignment(.leading)
                         .fixedSize(horizontal: false, vertical: true)
                 }
@@ -49,7 +49,7 @@ struct TopicPage: View {
             
         }
         .padding(24)
-        .frame(maxWidth:340, minHeight: 100, alignment: .leading)
+        .frame(maxWidth: .infinity, minHeight: 100, alignment: .leading)
         .background(
             RoundedRectangle(cornerRadius:20)
                 .fill(Color(hex:"#FFFFFF").opacity(0.5))

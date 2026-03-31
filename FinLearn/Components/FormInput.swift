@@ -23,22 +23,21 @@ struct FormInput: View {
             VStack(alignment: .leading, spacing: 4) {
                 Text(title)
                     .font(.system(size: 14, weight: .medium))
-                    .foregroundColor(Color(hex: "#A2ACBD"))
+                    .foregroundColor(Color(hex: "#1B2534"))
                 
                 ZStack(alignment: .trailing) {
-                    // Hidden TextField (always visible, used for normal input)
-                    TextField("", text: $text, prompt: Text("Write here...").foregroundColor(Color(hex: "#A2ACBD")))
-                        .padding(.vertical, 4)
-                        .disabled(isSecure) // disable when it's a password field
-                        .opacity(isSecure ? 0 : 1) // hide when secure
+                    if isSecure && !isPasswordVisible {
+                        SecureField("", text: $text, prompt: Text("Write here...").foregroundColor(Color(hex: "#A2ACBD")))
+                            .padding(.vertical, 4)
+                            .foregroundColor(.textColor)
+                    } else {
+                        TextField("", text: $text, prompt: Text("Write here...").foregroundColor(Color(hex: "#A2ACBD")))
+                            .padding(.vertical, 4)
+                            .foregroundColor(.textColor)
+                            .autocapitalization(.none)
+                            .disableAutocorrection(true)
+                    }
                     
-                    // Hidden SecureField
-                    SecureField("", text: $text, prompt: Text("Write here...").foregroundColor(Color(hex: "#A2ACBD")))
-                        .padding(.vertical, 4)
-                        .opacity(isSecure && !isPasswordVisible ? 1 : 0)
-                        .disabled(isSecure && isPasswordVisible)
-                    
-                    // Show/Hide button for password
                     if isSecure {
                         Button(action: {
                             isPasswordVisible.toggle()
@@ -47,7 +46,6 @@ struct FormInput: View {
                                 .foregroundColor(Color(hex: "#A2ACBD"))
                                 .padding(.trailing, 8)
                         }
-                        .padding(.top, 4)
                     }
                 }
             }
@@ -55,6 +53,7 @@ struct FormInput: View {
         .padding(16)
         .background(Color.white)
         .cornerRadius(12)
-        .frame(width: 325, height: 72) // increased height a bit for better touch
+        .frame(maxWidth: 400)
+        .frame(height: 72)
     }
 }
